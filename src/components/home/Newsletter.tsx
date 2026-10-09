@@ -8,7 +8,7 @@ export function Newsletter() {
   const [email, setEmail] = useState("");
 
   return (
-    <section className="bg-brass-soft/40">
+    <section className="bg-brass-soft/60">
       <div className="container-page py-16 md:py-20 grid md:grid-cols-2 gap-8 items-center">
         <h2 className="font-display text-3xl md:text-4xl text-charcoal text-balance">Get the good stuff before everyone else.</h2>
         <form

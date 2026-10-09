@@ -1,5 +1,5 @@
-import type { Metadata } from "next";
-import { Fraunces, Space_Grotesk } from "next/font/google";
+import type { Metadata, Viewport } from "next";
+import { Bricolage_Grotesque, DM_Sans } from "next/font/google";
 import "./globals.css";
 import { CartProvider } from "@/context/CartContext";
 import { ToastProvider } from "@/components/ui/Toast";
@@ -8,8 +8,15 @@ import { Footer } from "@/components/layout/Footer";
 import { CartDrawer } from "@/components/layout/CartDrawer";
 import { MobileTabBar } from "@/components/layout/MobileTabBar";
 
-const fraunces = Fraunces({ subsets: ["latin"], variable: "--font-fraunces", display: "swap" });
-const spaceGrotesk = Space_Grotesk({ subsets: ["latin"], variable: "--font-space-grotesk", display: "swap" });
+const display = Bricolage_Grotesque({ subsets: ["latin"], variable: "--font-display", display: "swap" });
+const body = DM_Sans({ subsets: ["latin"], variable: "--font-body", display: "swap" });
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  viewportFit: "cover",
+  themeColor: "#0b1530",
+};
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://www.dropera.example"),
@@ -22,7 +29,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${fraunces.variable} ${spaceGrotesk.variable}`}>
+    <html lang="en" className={`${display.variable} ${body.variable}`}>
       <body className="font-sans antialiased">
         <script
           type="application/ld+json"
@@ -38,7 +45,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <ToastProvider>
           <CartProvider>
             <Header />
-            <main className="pb-16 md:pb-0">{children}</main>
+            <main className="pb-[calc(4rem+env(safe-area-inset-bottom))] md:pb-0">{children}</main>
             <Footer />
             <CartDrawer />
             <MobileTabBar />

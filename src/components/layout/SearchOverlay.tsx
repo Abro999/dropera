@@ -93,7 +93,7 @@ export function SearchOverlay({ isOpen, onClose }: { isOpen: boolean; onClose: (
                 <ul className="flex flex-col gap-2">
                   {recent.map((r) => (
                     <li key={r}>
-                      <button onClick={() => runSearch(r)} className="text-charcoal font-sans hover:text-brass transition-colors">
+                      <button onClick={() => runSearch(r)} className="text-charcoal font-sans hover:text-teel transition-colors">
                         {r}
                       </button>
                     </li>
@@ -106,7 +106,7 @@ export function SearchOverlay({ isOpen, onClose }: { isOpen: boolean; onClose: (
               <ul className="flex flex-col gap-2">
                 {POPULAR.map((p) => (
                   <li key={p}>
-                    <button onClick={() => runSearch(p)} className="text-charcoal font-sans hover:text-brass transition-colors">
+                    <button onClick={() => runSearch(p)} className="text-charcoal font-sans hover:text-teel transition-colors">
                       {p}
                     </button>
                   </li>
@@ -118,7 +118,7 @@ export function SearchOverlay({ isOpen, onClose }: { isOpen: boolean; onClose: (
               <ul className="flex flex-col gap-2">
                 {categories.slice(0, 5).map((c) => (
                   <li key={c.id}>
-                    <Link href={`/category/${c.slug}`} onClick={onClose} className="text-charcoal font-sans hover:text-brass transition-colors">
+                    <Link href={`/category/${c.slug}`} onClick={onClose} className="text-charcoal font-sans hover:text-teel transition-colors">
                       {c.title}
                     </Link>
                   </li>

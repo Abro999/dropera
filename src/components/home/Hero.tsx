@@ -1,19 +1,21 @@
 import Image from "next/image";
 import { Button } from "@/components/ui/Button";
 
+const perks = ["Free shipping over ₹5,000", "Secure checkout", "30-day returns", "Verified reviews"];
+
 export function Hero() {
   return (
-    <section className="relative bg-ink text-cream overflow-hidden">
-      <div className="container-page grid md:grid-cols-2 gap-10 items-center pt-16 pb-20 md:pt-24 md:pb-28">
-        <div className="flex flex-col gap-6 order-2 md:order-1">
-          <span className="font-sans text-sm text-brass-soft">Curated across tech, home & everyday carry</span>
-          <h1 className="font-display text-[13vw] leading-[0.95] md:text-6xl lg:text-7xl tracking-tightest text-balance">
+    <section className="bg-ink text-cream">
+      <div className="container-page grid md:grid-cols-2 gap-10 lg:gap-16 items-center pt-10 pb-14 md:pt-20 md:pb-24">
+        <div className="flex flex-col items-start gap-6 order-2 md:order-1">
+          <p className="text-sm font-medium text-brass">Curated across tech, home & everyday carry</p>
+          <h1 className="font-display text-4xl sm:text-5xl lg:text-6xl leading-[1.05] tracking-tight text-balance max-w-xl">
             Good taste, done finding things for you.
           </h1>
-          <p className="font-sans text-cream/70 text-base md:text-lg max-w-md">
+          <p className="text-base md:text-lg text-cream/75 max-w-md leading-relaxed">
             DropEra is a running search for the object that actually earns its shelf space — tested, sourced, and shipped without the thirty tabs of research.
           </p>
-          <div className="flex flex-wrap gap-4 pt-2">
+          <div className="flex flex-col sm:flex-row gap-3 w-full sm:w-auto pt-2">
             <Button href="/shop" variant="secondary" size="lg">
               Shop the collection
             </Button>
@@ -21,43 +23,30 @@ export function Hero() {
               See what's new
             </Button>
           </div>
-          <div className="flex items-center gap-3 pt-4 text-sm font-sans text-cream/50">
-            <div className="flex -space-x-2">
-              {[1, 2, 3].map((i) => (
-                <span key={i} className="w-7 h-7 rounded-full bg-cream/20 border border-ink" />
-              ))}
-            </div>
-            Trusted by 40,000+ considered shoppers
-          </div>
+          <p className="pt-2 text-sm text-cream/70">
+            Trusted by <span className="font-semibold text-cream">40,000+</span> considered shoppers
+          </p>
         </div>
 
-        <div className="relative order-1 md:order-2 grid grid-cols-2 gap-4">
-          <div className="relative aspect-[3/4] mt-8 overflow-hidden">
-            <Image src="https://images.unsplash.com/photo-1518444065439-e933c06ce9cd?q=80&w=1000&auto=format&fit=crop" alt="Aura wireless headphones on a stand" fill priority sizes="(max-width: 768px) 50vw, 25vw" className="object-cover" />
+        <div className="order-1 md:order-2 grid grid-cols-2 gap-3 md:gap-4">
+          <div className="relative aspect-[3/4] mt-8 overflow-hidden rounded-lg bg-ink-soft">
+            <Image src="https://images.unsplash.com/photo-1484704849700-f032a568e944?q=80&w=1000&auto=format&fit=crop" alt="Wireless over-ear headphones" fill priority sizes="(max-width: 768px) 50vw, 25vw" className="object-cover" />
           </div>
-          <div className="relative aspect-[3/4] overflow-hidden">
-            <Image src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?q=80&w=1000&auto=format&fit=crop" alt="Field mechanical watch" fill sizes="(max-width: 768px) 50vw, 25vw" className="object-cover" />
+          <div className="relative aspect-[3/4] overflow-hidden rounded-lg bg-ink-soft">
+            <Image src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?q=80&w=1000&auto=format&fit=crop" alt="Minimal wristwatch" fill sizes="(max-width: 768px) 50vw, 25vw" className="object-cover" />
           </div>
         </div>
       </div>
 
-      <div className="border-t border-cream/10 overflow-hidden">
-        <div className="flex animate-marquee whitespace-nowrap py-4">
-          {Array.from({ length: 2 }).map((_, i) => (
-            <div key={i} className="flex items-center gap-10 pr-10 font-sans text-sm text-cream/40">
-              <span>Free shipping over ₹5,000</span>
-              <span>·</span>
-              <span>Secure checkout</span>
-              <span>·</span>
-              <span>30-day returns</span>
-              <span>·</span>
-              <span>New drops every week</span>
-              <span>·</span>
-              <span>Real reviews, verified purchases</span>
-              <span>·</span>
-            </div>
+      <div className="border-t border-line-dark">
+        <ul className="container-page grid grid-cols-2 md:grid-cols-4 gap-x-6 gap-y-3 py-5 text-sm text-cream/80">
+          {perks.map((p) => (
+            <li key={p} className="flex items-center gap-2.5">
+              <span className="w-1.5 h-1.5 shrink-0 rounded-full bg-brass" />
+              {p}
+            </li>
           ))}
-        </div>
+        </ul>
       </div>
     </section>
   );

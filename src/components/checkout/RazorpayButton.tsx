@@ -76,7 +76,7 @@ export function RazorpayButton({ cart, shipping }: { cart: Cart; shipping: Shipp
         name: "DropEra",
         description: `${cart.lines.length} item${cart.lines.length > 1 ? "s" : ""}`,
         prefill: { name: shipping.name, contact: shipping.phone, email: shipping.email || "" },
-        theme: { color: "#12181B" },
+        theme: { color: "#0B1530" },
         handler: async (response: any) => {
           const verifyRes = await fetch("/api/checkout/verify", {
             method: "POST",

@@ -8,37 +8,6 @@ const img = (id: string, alt: string) => ({
 
 export const products: Product[] = [
   {
-    id: "p-1791436168051",
-    slug: "mens-suede-look-bomber-jacket",
-    title: "Men's Suede-Look Bomber Jacket – Full Zip Casual Outerwear",
-    descriptor: "Soft suede-look bomber with full zip and ribbed trims for an easy everyday layer.",
-    description: "A classic bomber silhouette in a soft suede-look finish. Full zip closure, ribbed collar, cuffs and hem keep the fit sharp and comfortable, while the smooth faux suede fabric gives it a premium feel. Easy to style with a tee and jeans or dressed up with chinos. Ideal for fall and spring layering.",
-    images: [
-      { id: "p-1791436168051-img1", url: "/uploads/p-1791436168051-1.jpg", alt: "Men's Suede-Look Bomber Jacket – Full Zip Casual Outerwear" },
-      { id: "p-1791436168051-img2", url: "/uploads/p-1791436168051-2.jpg", alt: "Men's Suede-Look Bomber Jacket – Full Zip Casual Outerwear" },
-      { id: "p-1791436168051-img3", url: "/uploads/p-1791436168051-3.jpg", alt: "Men's Suede-Look Bomber Jacket – Full Zip Casual Outerwear" },
-    ],
-    price: 34.99,
-    compareAtPrice: 59.99,
-    currency: "USD",
-    variants: [
-      { id: "p-1791436168051-v1", title: "Black / M", price: 34.99, compareAtPrice: 59.99, sku: "P-1791436168051-1", inventory: 20, options: {"Color / Size":"Black / M"} },
-      { id: "p-1791436168051-v2", title: "Black / L", price: 34.99, compareAtPrice: 59.99, sku: "P-1791436168051-2", inventory: 20, options: {"Color / Size":"Black / L"} },
-      { id: "p-1791436168051-v3", title: "Black / XL", price: 34.99, compareAtPrice: 59.99, sku: "P-1791436168051-3", inventory: 20, options: {"Color / Size":"Black / XL"} },
-    ],
-    options: [{ name: "Color / Size", values: ["Black / M","Black / L","Black / XL"] }],
-    inventory: 60,
-    rating: 4.5,
-    reviewCount: 0,
-    category: "fashion",
-    tags: ["new"],
-    badges: ["new"],
-    shipping: "Ships internationally. Delivery in 10-20 business days. Tracking provided.",
-    specifications: [{"label":"Material","value":"Faux suede (polyester blend)"},{"label":"Closure","value":"Full zip"},{"label":"Fit","value":"Regular (size up if between sizes)"},{"label":"Season","value":"Fall / Spring"},{"label":"Care","value":"Hand wash cold, do not bleach"}],
-    features: ["Full zip front closure","Soft suede-look fabric","Ribbed collar, cuffs and hem","Side pockets","Casual and smart-casual styling"],
-    faqs: [{"question":"Is this real suede?","answer":"It is a faux suede finish, soft to the touch and easy to care for."},{"question":"Does it run small?","answer":"It can run slightly small. If you are between sizes, we recommend sizing up."},{"question":"Can I track my order?","answer":"Yes, tracking details are sent as soon as your order ships."}],
-  },
-  {
     id: "p-01",
     slug: "aura-wireless-headphones",
     title: "Aura Wireless Headphones",
@@ -46,8 +15,7 @@ export const products: Product[] = [
     description:
       "Aura pairs a warm, studio-tuned driver with 40 hours of battery life and memory-foam ear cups you'll forget you're wearing.",
     images: [
-      img("photo-1518444065439-e933c06ce9cd", "Aura headphones on a stand"),
-      img("photo-1484704849700-f032a568e944", "Aura headphones side profile"),
+      img("photo-1484704849700-f032a568e944", "Aura wireless headphones"),
     ],
     price: 14999,
     compareAtPrice: 18999,

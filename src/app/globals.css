@@ -3,18 +3,18 @@
 @tailwind utilities;
 
 :root {
-  --color-ink: #12181b;
-  --color-ink-soft: #1b2427;
-  --color-paper: #ede9e0;
-  --color-paper-soft: #e2ddd0;
-  --color-cream: #f6f4ef;
-  --color-brass: #b9863e;
-  --color-brass-soft: #d9b988;
-  --color-teel: #3e5c58;
-  --color-charcoal: #1b211f;
-  --color-rust: #a24a34;
-  --color-line: #d8d2c3;
-  --color-line-dark: #2a3336;
+  --color-ink: #0b1530;
+  --color-ink-soft: #14214a;
+  --color-paper: #f4f6fb;
+  --color-paper-soft: #e6eaf4;
+  --color-cream: #fbfcff;
+  --color-brass: #ffb020;
+  --color-brass-soft: #ffd27a;
+  --color-teel: #0a7c76;
+  --color-charcoal: #0e1730;
+  --color-rust: #d63a26;
+  --color-line: #dce1ee;
+  --color-line-dark: #26345e;
 
   --radius-sm: 2px;
   --radius-md: 4px;
@@ -52,7 +52,14 @@ body {
 
 ::selection {
   background-color: var(--color-brass);
-  color: var(--color-cream);
+  color: var(--color-ink);
+}
+
+@layer base {
+  .font-display {
+    font-weight: 600;
+    letter-spacing: -0.02em;
+  }
 }
 
 a:focus-visible,
@@ -61,7 +68,7 @@ input:focus-visible,
 select:focus-visible,
 textarea:focus-visible,
 [tabindex]:focus-visible {
-  outline: 2px solid var(--color-brass);
+  outline: 2px solid var(--color-teel);
   outline-offset: 3px;
 }
 

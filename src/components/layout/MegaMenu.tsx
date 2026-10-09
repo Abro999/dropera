@@ -4,7 +4,7 @@ import { categories } from "@/data/categories";
 
 export function MegaMenu() {
   return (
-    <div className="absolute left-0 right-0 top-full bg-cream border-t border-b border-line shadow-[0_20px_40px_-20px_rgba(18,24,27,0.15)]">
+    <div className="absolute left-0 right-0 top-full bg-cream border-t border-b border-line shadow-[0_20px_40px_-20px_rgba(11,21,48,0.15)]">
       <div className="container-page py-8 grid grid-cols-4 gap-6">
         {categories.slice(0, 4).map((c) => (
           <Link key={c.id} href={`/category/${c.slug}`} className="group">
