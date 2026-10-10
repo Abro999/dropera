@@ -9,7 +9,7 @@ import { EmptyState } from "@/components/ui/EmptyState";
 import { getAllProducts } from "@/data/products";
 import { RazorpayButton } from "@/components/checkout/RazorpayButton";
 import { ShippingAddressForm } from "@/components/checkout/ShippingAddressForm";
-import { ShippingAddress } from "@/lib/cj";
+import { ShippingAddress } from "@/lib/types";
 import { formatPrice } from "@/lib/currency";
 
 export default function CartPage() {

@@ -31,9 +31,8 @@ function compressImage(file: File, maxWidth = 1200, quality = 0.8): Promise<stri
   });
 }
 
-export default function AdminEditProductPage({ params, searchParams }: { params: { id: string }; searchParams: { password?: string } }) {
+export default function AdminEditProductPage({ params }: { params: { id: string } }) {
   const router = useRouter();
-  const [password, setPassword] = useState(searchParams.password || "");
   const [loaded, setLoaded] = useState(false);
   const [existingImages, setExistingImages] = useState<string[]>([]);
   const [newImages, setNewImages] = useState<{ name: string; dataUrl: string }[]>([]);
@@ -56,9 +55,8 @@ export default function AdminEditProductPage({ params, searchParams }: { params:
   const [status, setStatus] = useState<{ type: "idle" | "loading" | "success" | "error"; message?: string }>({ type: "idle" });
 
   useEffect(() => {
-    if (!password) return;
     (async () => {
-      const res = await fetch(`/api/admin/product/${params.id}?password=${encodeURIComponent(password)}`);
+      const res = await fetch(`/api/admin/product/${params.id}`, { cache: "no-store" });
       const data = await res.json();
       if (!res.ok) {
         setStatus({ type: "error", message: data.error || "Couldn't load this product." });
@@ -84,7 +82,7 @@ export default function AdminEditProductPage({ params, searchParams }: { params:
       });
       setLoaded(true);
     })();
-  }, [password, params.id]);
+  }, [params.id]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     setForm((f) => ({ ...f, [e.target.name]: e.target.value }));
@@ -109,7 +107,6 @@ export default function AdminEditProductPage({ params, searchParams }: { params:
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          password,
           id: params.id,
           badges,
           imageFiles: newImages.length > 0 ? newImages : undefined,
@@ -135,19 +132,11 @@ export default function AdminEditProductPage({ params, searchParams }: { params:
     return (
       <div className="container-page py-14 max-w-sm">
         <h1 className="font-display text-3xl text-charcoal mb-6">Edit product</h1>
-        <form
-          onSubmit={(e) => {
-            e.preventDefault();
-            setPassword(password);
-          }}
-          className="flex flex-col gap-4"
-        >
-          <input type="password" placeholder="Admin password" value={password} onChange={(e) => setPassword(e.target.value)} className={inputClass} required />
-          <button type="submit" className="bg-ink text-cream font-sans py-3 rounded-full">
-            Load product
-          </button>
-          {status.type === "error" && <p className="text-rust text-sm font-sans">{status.message}</p>}
-        </form>
+        {status.type === "error" ? (
+          <p className="text-rust text-sm font-sans">{status.message}</p>
+        ) : (
+          <p className="text-sm font-sans text-charcoal/60">Loading product…</p>
+        )}
       </div>
     );
   }

@@ -123,3 +123,14 @@ export interface ProductFilters {
   onSaleOnly?: boolean;
   sort?: "featured" | "price-asc" | "price-desc" | "rating" | "newest";
 }
+
+export interface ShippingAddress {
+  name: string;
+  phone: string;
+  email?: string;
+  address: string;
+  city: string;
+  province: string;
+  zip: string;
+  countryCode: string;
+}

@@ -1,12 +1,13 @@
 import { NextResponse } from "next/server";
 import { getAllProducts } from "@/data/products";
+import { requireAdmin } from "@/lib/security/auth";
+
+export const runtime = "nodejs";
+export const dynamic = "force-dynamic";
 
 export async function GET(req: Request) {
-  const { searchParams } = new URL(req.url);
-  const password = searchParams.get("password");
-  if (password !== process.env.ADMIN_PASSWORD) {
-    return NextResponse.json({ error: "Wrong password." }, { status: 401 });
-  }
+  const denied = requireAdmin(req);
+  if (denied) return denied;
 
   const products = getAllProducts().map((p) => ({
     id: p.id,
@@ -18,5 +19,5 @@ export async function GET(req: Request) {
     image: p.images[0]?.url ?? "",
   }));
 
-  return NextResponse.json({ products });
+  return NextResponse.json({ products }, { headers: { "Cache-Control": "no-store" } });
 }

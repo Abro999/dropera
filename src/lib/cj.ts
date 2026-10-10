@@ -1,21 +1,10 @@
-import { Cart } from "@/lib/types";
-import { getAllProducts } from "@/data/products";
+import { PricedLine } from "@/lib/checkout/pricing";
+import { ShippingAddress } from "@/lib/types";
 
-export interface ShippingAddress {
-  name: string;
-  phone: string;
-  email?: string;
-  address: string;
-  city: string;
-  province: string;
-  zip: string;
-  countryCode: string;
-}
+export type { ShippingAddress };
 
-// CJ Dropshipping access tokens are cached server-side for 24h on their end,
-// so it's safe (and avoids needing our own persistent storage) to just
-// request a fresh one before each order — CJ returns the same cached token
-// if we've already asked for one recently.
+const CJ_BASE = "https://developers.cjdropshipping.com/api2.0/v1";
+
 async function getCjAccessToken(): Promise<string> {
   const email = process.env.CJ_EMAIL;
   const apiKey = process.env.CJ_API_KEY;
@@ -23,10 +12,11 @@ async function getCjAccessToken(): Promise<string> {
     throw new Error("CJ Dropshipping isn't configured — set CJ_EMAIL and CJ_API_KEY.");
   }
 
-  const res = await fetch("https://developers.cjdropshipping.com/api2.0/v1/authentication/getAccessToken", {
+  const res = await fetch(`${CJ_BASE}/authentication/getAccessToken`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ email, apiKey }),
+    signal: AbortSignal.timeout(10_000),
   });
   const data = await res.json();
   if (!res.ok || !data.result) {
@@ -35,24 +25,13 @@ async function getCjAccessToken(): Promise<string> {
   return data.data.accessToken as string;
 }
 
-// Forwards a paid cart to CJ Dropshipping for fulfillment. Only lines whose
-// variant has a `supplierSku` set (mapped in the admin product form) are
-// sent — anything without one is skipped and reported back, since CJ has
-// no way to fulfill a product it doesn't recognize.
-export async function forwardOrderToCj(cart: Cart, shipping: ShippingAddress) {
-  const allProducts = getAllProducts();
-
-  const products: { vid?: string; sku?: string; quantity: number }[] = [];
+export async function forwardOrderToCj(lines: PricedLine[], shipping: ShippingAddress, orderRef: string) {
+  const products: { vid: string; quantity: number }[] = [];
   const skipped: string[] = [];
 
-  for (const line of cart.lines) {
-    const product = allProducts.find((p) => p.id === line.productId);
-    const variant = product?.variants.find((v) => v.id === line.variantId);
-    if (variant?.supplierSku) {
-      products.push({ vid: variant.supplierSku, quantity: line.quantity });
-    } else {
-      skipped.push(line.productTitle);
-    }
+  for (const line of lines) {
+    if (line.supplierSku) products.push({ vid: line.supplierSku, quantity: line.quantity });
+    else skipped.push(line.productTitle);
   }
 
   if (products.length === 0) {
@@ -61,14 +40,11 @@ export async function forwardOrderToCj(cart: Cart, shipping: ShippingAddress) {
 
   const accessToken = await getCjAccessToken();
 
-  const res = await fetch("https://developers.cjdropshipping.com/api2.0/v1/shopping/order/createOrderV2", {
+  const res = await fetch(`${CJ_BASE}/shopping/order/createOrderV2`, {
     method: "POST",
-    headers: {
-      "CJ-Access-Token": accessToken,
-      "Content-Type": "application/json",
-    },
+    headers: { "CJ-Access-Token": accessToken, "Content-Type": "application/json" },
     body: JSON.stringify({
-      orderNumber: `dropera_${cart.id}_${Date.now()}`,
+      orderNumber: `dropera_${orderRef}`,
       shippingCustomerName: shipping.name,
       shippingPhone: shipping.phone,
       email: shipping.email || "",
@@ -78,9 +54,10 @@ export async function forwardOrderToCj(cart: Cart, shipping: ShippingAddress) {
       shippingZip: shipping.zip,
       shippingCountryCode: shipping.countryCode,
       shippingCountry: shipping.countryCode,
-      payType: 3, // create the order only, we handle payment ourselves via Razorpay
+      payType: 3,
       products,
     }),
+    signal: AbortSignal.timeout(15_000),
   });
 
   const data = await res.json();

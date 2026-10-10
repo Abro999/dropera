@@ -31,7 +31,6 @@ function compressImage(file: File, maxWidth = 1200, quality = 0.8): Promise<stri
 }
 
 export default function AdminAddProductPage() {
-  const [password, setPassword] = useState("");
   const [form, setForm] = useState({
     title: "",
     slug: "",
@@ -85,7 +84,7 @@ export default function AdminAddProductPage() {
       const res = await fetch("/api/admin/add-product", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ password, badges, imageFiles: images, ...form }),
+        body: JSON.stringify({ badges, imageFiles: images, ...form }),
       });
       const data = await res.json();
       if (!res.ok) {
@@ -114,10 +113,6 @@ export default function AdminAddProductPage() {
       <p className="text-sm text-charcoal/60 font-sans mb-8">Fills in the product catalog directly. Takes about 2 minutes to go live after submitting.</p>
 
       <form onSubmit={handleSubmit} className="flex flex-col gap-5">
-        <div>
-          <label className="text-xs font-sans text-charcoal/50 mb-1 block">Admin password</label>
-          <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} className={inputClass} required />
-        </div>
 
         <div>
           <label className="text-xs font-sans text-charcoal/50 mb-1 block">Product title</label>

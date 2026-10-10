@@ -1,6 +1,6 @@
 "use client";
 
-import { ShippingAddress } from "@/lib/cj";
+import { ShippingAddress } from "@/lib/types";
 
 export function ShippingAddressForm({
   value,

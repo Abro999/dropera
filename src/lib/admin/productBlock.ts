@@ -153,7 +153,8 @@ export function insertProductEntry(content: string, entry: string): string {
 }
 
 export function removeProductEntry(content: string, id: string): string {
-  const regex = new RegExp(`\\n\\s*\\{\\s*\\n\\s*id: ${JSON.stringify(id)},[\\s\\S]*?\\n  \\},`, "m");
+  const escapedId = JSON.stringify(id).replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+  const regex = new RegExp(`\\n\\s*\\{\\s*\\n\\s*id: ${escapedId},[\\s\\S]*?\\n  \\},`, "m");
   if (!regex.test(content)) {
     throw new Error("Couldn't find that product in the file — it may have already been removed.");
   }

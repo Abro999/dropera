@@ -2,8 +2,7 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { Cart } from "@/lib/types";
-import { ShippingAddress } from "@/lib/cj";
+import { Cart, ShippingAddress } from "@/lib/types";
 import { Button } from "@/components/ui/Button";
 import { useToast } from "@/components/ui/Toast";
 import { useCart } from "@/context/CartContext";
@@ -46,6 +45,7 @@ export function RazorpayButton({ cart, shipping }: { cart: Cart; shipping: Shipp
       return;
     }
     setIsProcessing(true);
+    const cartLines = cart.lines.map((l) => ({ productId: l.productId, variantId: l.variantId, quantity: l.quantity }));
 
     try {
       const scriptLoaded = await loadRazorpayScript();
@@ -58,7 +58,7 @@ export function RazorpayButton({ cart, shipping }: { cart: Cart; shipping: Shipp
       const orderRes = await fetch("/api/checkout/create-order", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ cart }),
+        body: JSON.stringify({ lines: cartLines, shipping }),
       });
       const orderData = await orderRes.json();
 
@@ -81,7 +81,13 @@ export function RazorpayButton({ cart, shipping }: { cart: Cart; shipping: Shipp
           const verifyRes = await fetch("/api/checkout/verify", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ ...response, cart, shipping }),
+            body: JSON.stringify({
+              razorpay_order_id: response.razorpay_order_id,
+              razorpay_payment_id: response.razorpay_payment_id,
+              razorpay_signature: response.razorpay_signature,
+              lines: cartLines,
+              shipping,
+            }),
           });
           const verifyData = await verifyRes.json();
 

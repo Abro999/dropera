@@ -6,11 +6,11 @@ const perks = ["Free shipping over ₹5,000", "Secure checkout", "30-day returns
 export function Hero() {
   return (
     <section className="bg-ink text-cream">
-      <div className="container-page grid md:grid-cols-2 gap-10 lg:gap-16 items-center pt-10 pb-14 md:pt-20 md:pb-24">
+      <div className="container-page grid md:grid-cols-2 gap-10 lg:gap-16 items-center pt-10 pb-12 md:pt-20 md:pb-24">
         <div className="flex flex-col items-start gap-6 order-2 md:order-1">
           <p className="text-sm font-medium text-brass">Curated across tech, home & everyday carry</p>
           <h1 className="font-display text-4xl sm:text-5xl lg:text-6xl leading-[1.05] tracking-tight text-balance max-w-xl">
-            Good taste, done finding things for you.
+            Better things, found for you.
           </h1>
           <p className="text-base md:text-lg text-cream/75 max-w-md leading-relaxed">
             DropEra is a running search for the object that actually earns its shelf space — tested, sourced, and shipped without the thirty tabs of research.
@@ -38,15 +38,26 @@ export function Hero() {
         </div>
       </div>
 
-      <div className="border-t border-line-dark">
-        <ul className="container-page grid grid-cols-2 md:grid-cols-4 gap-x-6 gap-y-3 py-5 text-sm text-cream/80">
-          {perks.map((p) => (
-            <li key={p} className="flex items-center gap-2.5">
-              <span className="w-1.5 h-1.5 shrink-0 rounded-full bg-brass" />
-              {p}
-            </li>
+      <div
+        className="border-t border-line-dark overflow-hidden"
+        aria-label="Store promises"
+        style={{
+          maskImage: "linear-gradient(to right, transparent, #000 6%, #000 94%, transparent)",
+          WebkitMaskImage: "linear-gradient(to right, transparent, #000 6%, #000 94%, transparent)",
+        }}
+      >
+        <div className="flex w-max animate-marquee py-4 text-sm text-cream/80 hover:[animation-play-state:paused]">
+          {[0, 1].map((group) => (
+            <ul key={group} aria-hidden={group === 1} className="flex shrink-0 items-center">
+              {[...perks, ...perks].map((perk, i) => (
+                <li key={i} className="flex items-center whitespace-nowrap">
+                  <span className="px-8">{perk}</span>
+                  <span className="w-1.5 h-1.5 rounded-full bg-brass" />
+                </li>
+              ))}
+            </ul>
           ))}
-        </ul>
+        </div>
       </div>
     </section>
   );

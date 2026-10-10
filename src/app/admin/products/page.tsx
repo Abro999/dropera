@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { formatPrice } from "@/lib/currency";
@@ -16,16 +16,14 @@ interface ProductRow {
 }
 
 export default function AdminProductsPage() {
-  const [password, setPassword] = useState("");
   const [products, setProducts] = useState<ProductRow[] | null>(null);
   const [status, setStatus] = useState<{ type: "idle" | "loading" | "error"; message?: string }>({ type: "idle" });
   const [deletingId, setDeletingId] = useState<string | null>(null);
 
-  const load = async (e: React.FormEvent) => {
-    e.preventDefault();
+  const load = async () => {
     setStatus({ type: "loading" });
     try {
-      const res = await fetch(`/api/admin/products?password=${encodeURIComponent(password)}`);
+      const res = await fetch("/api/admin/products", { cache: "no-store" });
       const data = await res.json();
       if (!res.ok) {
         setStatus({ type: "error", message: data.error || "Couldn't load products." });
@@ -45,7 +43,7 @@ export default function AdminProductsPage() {
       const res = await fetch("/api/admin/delete-product", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ password, id: product.id, title: product.title }),
+        body: JSON.stringify({ id: product.id }),
       });
       const data = await res.json();
       if (!res.ok) {
@@ -58,19 +56,22 @@ export default function AdminProductsPage() {
     }
   };
 
-  const inputClass = "w-full border border-line px-4 py-3 font-sans text-sm outline-none focus-visible:border-charcoal bg-cream";
+  useEffect(() => {
+    load();
+  }, []);
 
   if (!products) {
     return (
       <div className="container-page py-14 max-w-sm">
         <h1 className="font-display text-3xl text-charcoal mb-6">Manage products</h1>
-        <form onSubmit={load} className="flex flex-col gap-4">
-          <input type="password" placeholder="Admin password" value={password} onChange={(e) => setPassword(e.target.value)} className={inputClass} required />
-          <button type="submit" disabled={status.type === "loading"} className="bg-ink text-cream font-sans py-3 rounded-full disabled:opacity-50">
-            {status.type === "loading" ? "Loading…" : "Load products"}
-          </button>
-          {status.type === "error" && <p className="text-rust text-sm font-sans">{status.message}</p>}
-        </form>
+        {status.type === "error" ? (
+          <div className="flex flex-col gap-3">
+            <p className="text-rust text-sm font-sans">{status.message}</p>
+            <button onClick={load} className="bg-ink text-cream font-sans py-3 rounded-full">Try again</button>
+          </div>
+        ) : (
+          <p className="text-sm font-sans text-charcoal/60">Loading products…</p>
+        )}
       </div>
     );
   }
@@ -94,7 +95,7 @@ export default function AdminProductsPage() {
               <p className="font-sans text-sm text-charcoal truncate">{p.title}</p>
               <p className="text-xs text-charcoal/50 font-sans capitalize">{p.category} · {formatPrice(p.price, p.currency)}</p>
             </div>
-            <Link href={`/admin/edit/${p.id}?password=${encodeURIComponent(password)}`} className="text-sm font-sans text-teel underline shrink-0">
+            <Link href={`/admin/edit/${p.id}`} className="text-sm font-sans text-teel underline shrink-0">
               Edit
             </Link>
             <button

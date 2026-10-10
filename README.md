@@ -57,6 +57,19 @@ This same pattern (a `supplierSku` field + a small `src/lib/*.ts` integration fi
 Printify, or any other fulfillment API later — ask for help extending `src/lib/cj.ts` into a second provider when
 you're ready.
 
+## Security
+
+- **Admin** uses a signed, HttpOnly, SameSite=Strict session cookie (8 hours). Sign in at `/admin`. The password is never
+  sent in URLs. Login is rate limited, and every admin API route checks the session and the request origin.
+- **Checkout** never trusts prices from the browser. The server rebuilds the cart from the product catalog, creates the
+  Razorpay order for that exact amount, and on verification checks the signature, the payment status, the paid amount
+  and the cart contents before anything is sent to CJ.
+- **Inputs** are validated and size-limited on the server (product fields, uploaded photos, delivery address).
+- **Headers**: CSP, HSTS, frame and MIME protections are set in `next.config.mjs`.
+- Set `ADMIN_PASSWORD` (14+ characters) and `ADMIN_SESSION_SECRET` (`openssl rand -hex 32`) in Vercel. Use a
+  fine-grained GitHub token limited to this one repo with only "Contents: Read and write".
+- Never commit `.env` files. Rotate any key that was ever pasted into chat, screenshots or commits.
+
 ## Architecture
 
 ```
