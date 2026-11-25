@@ -10,15 +10,15 @@ export function ProductGallery({ images, title }: { images: ProductImage[]; titl
   const [fullscreen, setFullscreen] = useState(false);
 
   return (
-    <div className="flex flex-col-reverse lg:flex-row gap-3 lg:gap-5">
-      <div className="flex lg:flex-col gap-3 overflow-x-auto lg:overflow-visible no-scrollbar lg:w-24 shrink-0">
+    <div className="flex flex-col-reverse sm:flex-row gap-3 sm:gap-4 lg:gap-5">
+      <div className="flex sm:flex-col gap-3 overflow-x-auto sm:overflow-visible no-scrollbar sm:w-20 lg:w-24 shrink-0">
         {images.map((img, i) => (
           <button
             key={img.id}
             onClick={() => setActive(i)}
             aria-label={`View image ${i + 1}`}
             aria-current={active === i}
-            className={`relative w-16 h-20 lg:w-full lg:h-28 shrink-0 overflow-hidden border transition-colors ${active === i ? "border-ink" : "border-line hover:border-charcoal/40"}`}
+            className={`relative w-16 h-20 sm:w-full sm:h-24 lg:h-28 shrink-0 overflow-hidden border transition-colors ${active === i ? "border-ink" : "border-line hover:border-charcoal/40"}`}
           >
             <Image src={img.url} alt="" fill sizes="96px" className="object-cover" />
           </button>
@@ -26,7 +26,7 @@ export function ProductGallery({ images, title }: { images: ProductImage[]; titl
       </div>
 
       <button onClick={() => setFullscreen(true)} className="relative flex-1 aspect-[4/5] overflow-hidden bg-paper-soft border border-line cursor-zoom-in" aria-label="Open fullscreen gallery">
-        <Image src={images[active]?.url} alt={images[active]?.alt ?? title} fill sizes="(max-width: 1024px) 100vw, 50vw" priority className="object-cover" />
+        <Image src={images[active]?.url} alt={images[active]?.alt ?? title} fill sizes="(max-width: 640px) 100vw, 50vw" priority className="object-cover" />
       </button>
 
       <Modal isOpen={fullscreen} onClose={() => setFullscreen(false)} ariaLabel={`${title} fullscreen gallery`}>

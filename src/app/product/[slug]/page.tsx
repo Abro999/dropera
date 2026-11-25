@@ -100,9 +100,9 @@ export default async function ProductPage({ params }: { params: { slug: string }
         <span className="text-charcoal">{product.title}</span>
       </nav>
 
-      <div className="grid lg:grid-cols-[1.05fr_0.95fr] gap-8 lg:gap-16">
+      <div className="grid sm:grid-cols-[1.1fr_1fr] lg:grid-cols-[1.05fr_0.95fr] gap-6 sm:gap-8 lg:gap-16">
         <ProductGallery images={product.images} title={product.title} />
-        <div className="lg:sticky lg:top-28 self-start">
+        <div className="sm:sticky sm:top-4 lg:top-24 self-start">
           <ProductInfo product={product} />
         </div>
       </div>
