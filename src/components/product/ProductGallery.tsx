@@ -20,13 +20,13 @@ export function ProductGallery({ images, title }: { images: ProductImage[]; titl
             aria-current={active === i}
             className={`relative w-16 h-20 sm:w-full sm:h-24 lg:h-28 shrink-0 overflow-hidden border transition-colors ${active === i ? "border-ink" : "border-line hover:border-charcoal/40"}`}
           >
-            <Image src={img.url} alt="" fill sizes="96px" className="object-cover" />
+            <Image src={img.url} alt="" fill sizes="96px" className="object-cover object-top" />
           </button>
         ))}
       </div>
 
       <button onClick={() => setFullscreen(true)} className="relative flex-1 aspect-[4/5] overflow-hidden bg-paper-soft border border-line cursor-zoom-in" aria-label="Open fullscreen gallery">
-        <Image src={images[active]?.url} alt={images[active]?.alt ?? title} fill sizes="(max-width: 640px) 100vw, 50vw" priority className="object-cover" />
+        <Image src={images[active]?.url} alt={images[active]?.alt ?? title} fill sizes="(max-width: 640px) 100vw, 50vw" priority className="object-cover object-top" />
       </button>
 
       <Modal isOpen={fullscreen} onClose={() => setFullscreen(false)} ariaLabel={`${title} fullscreen gallery`}>
