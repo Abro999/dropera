@@ -1,28 +1,6 @@
 "use client";
 
-import Image from "next/image";
-import { useState } from "react";
-import { ProductImage } from "@/lib/types";
-import { Modal } from "@/components/ui/Modal";
-
-export function ProductGallery({ images, title }: { images: ProductImage[]; title: string }) {
-  const [active, setActive] = useState(0);
-  const [fullscreen, setFullscreen] = useState(false);
-
-  return (
-    <div className="flex flex-col-reverse md:flex-row gap-3 md:gap-4">
-      <div className="flex md:flex-col gap-3 overflow-x-auto md:overflow-visible no-scrollbar">
-        {images.map((img, i) => (
-          <button
-            key={img.id}
-            onClick={() => setActive(i)}
-            aria-label={`View image ${i + 1}`}
-            aria-current={active === i}
-            className={`relative w-16 h-20 md:w-20 md:h-24 shrink-0 overflow-hidden border transition-colors ${active === i ? "border-ink" : "border-line"}`}
-          >
-            <Image src={img.url} alt="" fill sizes="80px" className="object-cover" />
-          </button>
-        ))}
+wmmw
       </div>
 
       <button onClick={() => setFullscreen(true)} className="relative flex-1 aspect-[4/5] overflow-hidden bg-paper-soft cursor-zoom-in" aria-label="Open fullscreen gallery">
