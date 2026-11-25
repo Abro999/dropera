@@ -100,7 +100,7 @@ export function ProductInfo({ product }: { product: Product }) {
         </span>
       </div>
 
-      <div className="flex flex-col sm:flex-row gap-3">
+      <div className="flex flex-col md:flex-row gap-3">
         <Button
           variant="primary"
           size="lg"

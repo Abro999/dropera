@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 import { useCart } from "@/context/CartContext";
@@ -33,11 +34,12 @@ export function Header() {
             </button>
           </div>
 
-          <Link href="/" className="font-display text-[22px] md:text-2xl text-ink">
+          <Link href="/" className="flex items-center gap-2 font-display text-[22px] md:text-2xl text-ink shrink-0">
+            <Image src="/logo.png" alt="" width={36} height={36} className="w-8 h-8 md:w-9 md:h-9 rounded-full object-cover" priority />
             DropEra
           </Link>
 
-          <nav className="hidden md:flex items-center gap-8 font-sans text-[15px] font-medium text-ink">
+          <nav className="hidden md:flex items-center justify-center gap-8 font-sans text-[15px] font-medium text-ink">
             <div onMouseEnter={() => setMenuOpen(true)}>
               <Link href="/shop" className="hover:text-teel transition-colors">
                 Shop
