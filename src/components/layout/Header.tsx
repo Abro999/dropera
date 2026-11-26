@@ -39,7 +39,7 @@ export function Header() {
             DropEra
           </Link>
 
-          <nav className="hidden md:flex items-center justify-center gap-8 font-sans text-[15px] font-medium text-ink">
+          <nav className="hidden md:flex items-center justify-end gap-8 font-sans text-[15px] font-medium text-ink">
             <div onMouseEnter={() => setMenuOpen(true)}>
               <Link href="/shop" className="hover:text-teel transition-colors">
                 Shop
