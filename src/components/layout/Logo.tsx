@@ -13,13 +13,30 @@ export function Logo({ className = "w-8 h-8 md:w-9 md:h-9" }: { className?: stri
         </linearGradient>
       </defs>
       <rect width="40" height="40" rx="11" fill="url(#dropera-logo-bg)" />
+      <rect x="5" y="14" width="7" height="2.4" rx="1.2" fill="#0a7c76" />
+      <rect x="7" y="18.8" width="7" height="2.4" rx="1.2" fill="#0a7c76" />
+      <rect x="5" y="23.6" width="7" height="2.4" rx="1.2" fill="#0a7c76" />
+      <path
+        d="M15 15 L29 15 L31 32 L13 32 Z"
+        fill="none"
+        stroke="#fbfcff"
+        strokeWidth="2"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M19 15 V12.5 a3 3 0 0 1 6 0 V15"
+        fill="none"
+        stroke="#fbfcff"
+        strokeWidth="2"
+        strokeLinecap="round"
+      />
       <text
-        x="20"
-        y="27.5"
+        x="22"
+        y="28.5"
         textAnchor="middle"
         fontFamily="Arial, Helvetica, sans-serif"
         fontWeight="800"
-        fontSize="22"
+        fontSize="13"
         fill="#ffb020"
       >
         D

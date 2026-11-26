@@ -10,8 +10,8 @@ export function Hero() {
         <div className="flex flex-col items-start gap-6 order-2 md:order-1 w-full">
           <p className="text-sm font-medium text-brass">Curated across tech, home & everyday carry</p>
           <h1 className="font-display text-4xl sm:text-5xl lg:text-6xl leading-[1.1] tracking-tight w-full lg:max-w-xl">
-            <span className="block">Good finds.</span>
-            <span className="block">Zero guesswork.</span>
+            <span className="block">Fewer tabs.</span>
+            <span className="block">Better finds.</span>
           </h1>
           <p className="text-base md:text-lg text-cream/75 w-full lg:max-w-md leading-relaxed">
             DropEra is a running search for the object that actually earns its shelf space — tested, sourced, and shipped without the thirty tabs of research.
