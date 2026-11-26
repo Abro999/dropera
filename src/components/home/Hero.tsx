@@ -7,16 +7,15 @@ export function Hero() {
   return (
     <section className="bg-ink text-cream">
       <div className="container-page grid md:grid-cols-2 gap-10 lg:gap-16 items-center pt-10 pb-12 md:pt-20 md:pb-24">
-        <div className="flex flex-col items-start gap-6 order-2 md:order-1 w-full">
+        <div className="flex flex-col items-center md:items-start text-center md:text-left gap-6 order-2 md:order-1 w-full">
           <p className="text-sm font-medium text-brass">Curated across tech, home & everyday carry</p>
-          <h1 className="font-display text-4xl sm:text-5xl lg:text-6xl leading-[1.1] tracking-tight w-full lg:max-w-xl">
-            <span className="block">Fewer tabs.</span>
-            <span className="block">Better finds.</span>
+          <h1 className="font-display text-4xl sm:text-5xl lg:text-6xl leading-[1.1] tracking-tight text-balance w-full lg:max-w-xl">
+            Fewer tabs. Better finds.
           </h1>
           <p className="text-base md:text-lg text-cream/75 w-full lg:max-w-md leading-relaxed">
             DropEra is a running search for the object that actually earns its shelf space — tested, sourced, and shipped without the thirty tabs of research.
           </p>
-          <div className="flex flex-col sm:flex-row gap-3 w-full sm:w-auto pt-2">
+          <div className="flex flex-col sm:flex-row gap-3 w-full sm:w-auto justify-center md:justify-start pt-2">
             <Button href="/shop" variant="secondary" size="lg">
               Shop the collection
             </Button>
