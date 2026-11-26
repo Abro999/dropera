@@ -25,7 +25,7 @@ export function ProductGallery({ images, title }: { images: ProductImage[]; titl
         ))}
       </div>
 
-      <button onClick={() => setFullscreen(true)} className="relative flex-1 h-[400px] sm:h-[460px] lg:h-[560px] overflow-hidden bg-paper-soft border border-line cursor-zoom-in" aria-label="Open fullscreen gallery">
+      <button onClick={() => setFullscreen(true)} className="relative w-full sm:flex-1 shrink-0 h-[400px] sm:h-[460px] lg:h-[560px] overflow-hidden bg-paper-soft border border-line cursor-zoom-in" aria-label="Open fullscreen gallery">
         <Image src={images[active]?.url} alt={images[active]?.alt ?? title} fill sizes="(max-width: 640px) 100vw, 50vw" priority className="object-cover object-top" />
       </button>
 
