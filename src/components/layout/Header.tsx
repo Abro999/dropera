@@ -1,12 +1,12 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 import { useCart } from "@/context/CartContext";
 import { MegaMenu } from "./MegaMenu";
 import { MobileNav } from "./MobileNav";
 import { SearchOverlay } from "./SearchOverlay";
+import { Logo } from "./Logo";
 
 const navLinks = [
   { label: "New arrivals", href: "/category/new-arrivals" },
@@ -35,7 +35,7 @@ export function Header() {
           </div>
 
           <Link href="/" className="flex items-center gap-2 font-display text-[22px] md:text-2xl text-ink shrink-0">
-            <Image src="/logo.png" alt="" width={36} height={36} className="w-8 h-8 md:w-9 md:h-9 rounded-full object-cover" priority />
+            <Logo />
             DropEra
           </Link>
 

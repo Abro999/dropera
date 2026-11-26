@@ -29,11 +29,13 @@ export function Hero() {
         </div>
 
         <div className="order-1 md:order-2 grid grid-cols-2 gap-3 md:gap-4">
-          <div className="relative aspect-[3/4] mt-8 overflow-hidden rounded-lg bg-ink-soft">
-            <Image src="https://images.unsplash.com/photo-1484704849700-f032a568e944?q=80&w=1000&auto=format&fit=crop" alt="Wireless over-ear headphones" fill priority sizes="(max-width: 768px) 50vw, 25vw" className="object-cover" />
+          <div className="relative aspect-[3/4] md:mt-10 overflow-hidden rounded-xl ring-1 ring-cream/10 shadow-[0_20px_50px_-15px_rgba(0,0,0,0.5)] bg-ink-soft">
+            <Image src="https://images.unsplash.com/photo-1553774661-0651f14b2da4?q=80&w=1000&auto=format&fit=crop" alt="Premium wireless headphones on a clean studio backdrop" fill priority sizes="(max-width: 768px) 50vw, 25vw" className="object-cover" />
+            <div className="absolute inset-0 bg-gradient-to-t from-ink/40 via-transparent to-transparent" />
           </div>
-          <div className="relative aspect-[3/4] overflow-hidden rounded-lg bg-ink-soft">
-            <Image src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?q=80&w=1000&auto=format&fit=crop" alt="Minimal wristwatch" fill sizes="(max-width: 768px) 50vw, 25vw" className="object-cover" />
+          <div className="relative aspect-[3/4] overflow-hidden rounded-xl ring-1 ring-cream/10 shadow-[0_20px_50px_-15px_rgba(0,0,0,0.5)] bg-ink-soft">
+            <Image src="https://images.unsplash.com/photo-1655727010014-c2d05de8acea?q=80&w=1000&auto=format&fit=crop" alt="Minimal wristwatch on a clean studio backdrop" fill sizes="(max-width: 768px) 50vw, 25vw" className="object-cover" />
+            <div className="absolute inset-0 bg-gradient-to-t from-ink/40 via-transparent to-transparent" />
           </div>
         </div>
       </div>
